@@ -44,7 +44,7 @@ const ChefDetailsWithRecipes = () => {
       <h1 className="mt-14 text-center text-4xl font-bold">
         Famous Recipe's Of <span className="text-blue-600">{name}</span>
       </h1>
-      <div className="md:px-12 my-20 md:my-10 grid grid-cols-1 md:grid-cols-2 gap-4 ">
+      <div className="md:px-12 my-20 md:my-10 grid grid-cols-1 md:grid-cols-3 gap-4 ">
         {recipes?.map((recipe) => (
           <Recipe key={recipe._id} recipe={recipe}></Recipe>
         ))}

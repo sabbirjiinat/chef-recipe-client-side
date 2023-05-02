@@ -5,13 +5,13 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBalOsN6XF5YqU1Y6Ci_Zm1ZyDc6womvQM",
-  authDomain: "japanese-chef-recipe-auth.firebaseapp.com",
-  projectId: "japanese-chef-recipe-auth",
-  storageBucket: "japanese-chef-recipe-auth.appspot.com",
-  messagingSenderId: "909946443235",
-  appId: "1:909946443235:web:7371ad887fc9efb5acfcd6"
-};
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId
+}
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

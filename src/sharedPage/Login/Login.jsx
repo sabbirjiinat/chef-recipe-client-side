@@ -46,6 +46,7 @@ const Login = () => {
         const loggedUser = result.user;
         console.log(loggedUser);
         setUserSuccess('Successfully login with google')
+        navigate(from, {replace:true})
       }).catch(error => {
         console.log(error);
         setUserError(error.message)
