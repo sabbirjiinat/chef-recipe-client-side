@@ -2,7 +2,9 @@ import React, { useContext, useState } from "react";
 import loginAnimation from "../../../public/login/login.json";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
+import { FaGithub } from "react-icons/fa";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import googleLogo from "../../../src/assets/google.png";
 
 const Login = () => {
   const location = useLocation()
@@ -11,7 +13,7 @@ const Login = () => {
   const [userSuccess, setUserSuccess] = useState(null);
   const from = location.state?.from?.pathname || '/';
 
-  const { handleLoginWithEmail } = useContext(AuthContext);
+  const { handleLoginWithEmail,LogInWithGoogle } = useContext(AuthContext);
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -37,6 +39,18 @@ const Login = () => {
         setUserError(error.message);
       });
   };
+
+  const loginWithGoogle = () => {
+    LogInWithGoogle()
+      .then(result => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        setUserSuccess('Successfully login with google')
+      }).catch(error => {
+        console.log(error);
+        setUserError(error.message)
+    })
+  }
 
   return (
     <div className="mx-16 mt-16 md:flex justify-center gap-5 h-80">
@@ -85,6 +99,16 @@ const Login = () => {
         <button className="bg-blue-400 text-xl hover:bg-blue-600 duration-300 hover:text-white block text-center rounded-sm w-full px-3 py-1 font-semibold ">
           Login
         </button>
+        <div className="flex mt-5 gap-2">
+          <button onClick={loginWithGoogle} className="flex items-center gap-1 border-2 rounded-md hover:bg-blue-600 duration-300 hover:text-white px-1 py-1 font-semibold ">
+            <img className="h-4" src={googleLogo} alt="" />
+            Login With Google
+          </button>
+          <button className="flex items-center gap-1  hover:bg-blue-600 duration-300 hover:text-white  rounded-md px-1 py-1 font-semibold ">
+            <FaGithub></FaGithub>
+            Login With Github
+          </button>
+        </div>
       </form>
       <Lottie
         className="shadow-2xl"

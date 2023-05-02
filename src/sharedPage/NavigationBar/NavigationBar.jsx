@@ -32,7 +32,7 @@ const NavigationBar = () => {
        
             <div className="w-10 rounded-full">
         
-                <img src={user.photoURL} />
+                <img title={user.displayName} src={user.photoURL} />
               </div> 
             </label>
             </div> :     <Link to='/login' className="bg-blue-400  hover:bg-blue-600 duration-300 hover:text-white  text-center rounded-sm  px-3 py-1 font-semibold me-2 ">

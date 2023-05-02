@@ -1,13 +1,15 @@
 import React, { useContext, useState } from "react";
 import Lottie from "lottie-react";
 import { Link } from "react-router-dom";
+import { FaGithub } from "react-icons/fa";
 import registerAnimation from "../../../public/register/register1.json";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import googleLogo from "../../../src/assets/google.png";
 
 const Register = () => {
   const [userError, setUserError] = useState(null);
   const [userSuccess, setUserSuccess] = useState(null);
-  const { handleRegisterWithEmail } = useContext(AuthContext);
+  const { handleRegisterWithEmail,LogInWithGoogle } = useContext(AuthContext);
   const handleRegister = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -31,15 +33,30 @@ const Register = () => {
         const registeredUser = result.user;
         console.log(registeredUser);
         setUserSuccess("You have registered successfully");
-        form.reset()
+        form.reset();
       })
       .catch((error) => {
         console.log(error);
         setUserError(error.message);
       });
   };
+
+
+  const loginWithGoogle = () => {
+    LogInWithGoogle()
+      .then(result => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        setUserSuccess('Successfully login with google')
+      }).catch(error => {
+        console.log(error);
+        setUserError(error.message)
+    })
+  }
+
+
   return (
-    <div className=" mt-3 md:flex justify-center gap-5">
+    <div className=" md:flex justify-center gap-5">
       <form
         onSubmit={handleRegister}
         className=" w-full  md:w-2/5 shadow-2xl p-6"
@@ -135,6 +152,16 @@ const Register = () => {
         <button className="bg-blue-400 text-xl hover:bg-blue-600 duration-300 hover:text-white block text-center rounded-sm w-full px-3 py-1 font-semibold ">
           Register
         </button>
+        <div className="flex mt-5 gap-2">
+          <button onClick={loginWithGoogle} className="flex items-center gap-1 border-2 rounded-md hover:bg-blue-600 duration-300 hover:text-white px-1 py-1 font-semibold ">
+            <img className="h-4" src={googleLogo} alt="" />
+            Login With Google
+          </button>
+          <button className="flex items-center gap-1  hover:bg-blue-600 duration-300 hover:text-white  rounded-md px-1 py-1 font-semibold ">
+            <FaGithub></FaGithub>
+            Login With Github
+          </button>
+        </div>
       </form>
       <Lottie
         className="shadow-2xl md:w-2/5"
