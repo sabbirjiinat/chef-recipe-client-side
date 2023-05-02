@@ -5,7 +5,7 @@ const NavigationBar = () => {
     return (
         <div className="navbar bg-base-300 md:px-12">
         <div className="flex-1">
-          <Link className="btn btn-ghost normal-case text-xl">Sakura</Link>
+          <Link className="btn btn-ghost normal-case text-xl">Sakura Chef</Link>
         </div>
         <div className="flex-none">
                 <div className='space-x-3 pe-3 font-semibold'>
