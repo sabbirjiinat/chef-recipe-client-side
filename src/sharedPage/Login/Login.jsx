@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import loginAnimation from '../../../public/login/login.json'
 import { Link } from 'react-router-dom';
 import Lottie from "lottie-react";
+import { AuthContext } from '../../AuthProvider/AuthProvider';
 
 const Login = () => {
+    const { name } = useContext(AuthContext)
+    console.log(name);
   
     return (
         <div className="mx-16 mt-16 md:flex justify-center gap-5 h-80">
