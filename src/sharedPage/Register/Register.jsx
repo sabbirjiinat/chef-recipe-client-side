@@ -5,8 +5,8 @@ import registerAnimation from "../../../public/register/register1.json";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Register = () => {
-    const [userError, setUserError] = useState(null)
-    const [userSuccess,setUserSuccess] = useState(null)
+  const [userError, setUserError] = useState(null);
+  const [userSuccess, setUserSuccess] = useState(null);
   const { handleRegisterWithEmail } = useContext(AuthContext);
   const handleRegister = (event) => {
     event.preventDefault();
@@ -15,30 +15,35 @@ const Register = () => {
     const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
-      const confirm = form.confirm.value;
-      console.log(name, photo, email, password, confirm);
-      setUserError('')
-      setUserSuccess('')
-      if (password.length < 6) {
-          return setUserError('Write at least six character')
-      }
-      if (password != confirm) {
-          return setUserError("Password did't match")
-      }
+    const confirm = form.confirm.value;
+    console.log(name, photo, email, password, confirm);
+    setUserError("");
+    setUserSuccess("");
+    if (password.length < 6) {
+      return setUserError("Write at least six character");
+    }
+    if (password != confirm) {
+      return setUserError("Password did't match");
+    }
 
-      handleRegisterWithEmail(email, password)
-          .then(result => {
-              const registeredUser = result.user;
-              console.log(registeredUser);
-              setUserSuccess("You have registered successfully")
-          }).catch(error => {
-              console.log(error);
-              setUserError(error.message)
+    handleRegisterWithEmail(email, password)
+      .then((result) => {
+        const registeredUser = result.user;
+        console.log(registeredUser);
+        setUserSuccess("You have registered successfully");
+        form.reset()
       })
+      .catch((error) => {
+        console.log(error);
+        setUserError(error.message);
+      });
   };
   return (
     <div className=" mt-3 md:flex justify-center gap-5">
-      <form onSubmit={handleRegister} className=" w-full  md:w-2/5 shadow-2xl p-6">
+      <form
+        onSubmit={handleRegister}
+        className=" w-full  md:w-2/5 shadow-2xl p-6"
+      >
         <div className="mb-2">
           <div className="text-gray-600 font-bold">
             <label htmlFor="Name">Name</label>
@@ -103,9 +108,13 @@ const Register = () => {
             placeholder="Confirm Password"
             required
             id="confirm"
-                  />
-                  <p className="text-red-700"><small >{userError}</small></p>
-                  <p className="text-green-600"><small>{ userSuccess}</small></p>
+          />
+          <p className="text-red-700">
+            <small>{userError}</small>
+          </p>
+          <p className="text-green-600">
+            <small>{userSuccess}</small>
+          </p>
         </div>
 
         <div className="mb-2 flex gap-4">
