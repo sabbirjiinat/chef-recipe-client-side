@@ -3,6 +3,7 @@ import { Rating } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LazyLoad from 'react-lazy-load';
 
 const Recipe = ({ recipe }) => {
   console.log(recipe);
@@ -15,7 +16,10 @@ const Recipe = ({ recipe }) => {
   return (
     <div className="card card-compact shadow-2xl w-full">
       <figure>
-        <img className="h-40 w-full object-cover" src={image_url} alt="Shoes" />
+   
+      <img className="h-40 w-full object-cover" src={image_url} alt="Shoes" />
+   
+       
       </figure>
       <div className="card-body">
         <h2 className="card-title text-3xl">{name}</h2>

@@ -9,7 +9,9 @@ const ChefDetailsWithRecipes = () => {
     chefDetails;
   //   console.log(chefDetails);
   useEffect(() => {
-    fetch(`http://localhost:5330/recipe/${id}`)
+    fetch(
+      `https://react-firebase-chef-recipe-server-site.vercel.app/recipe/${id}`
+    )
       .then((res) => res.json())
       .then((data) => setRecipes(data));
   }, []);

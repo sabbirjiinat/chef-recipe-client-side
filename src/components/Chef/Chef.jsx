@@ -6,7 +6,7 @@ const Chef = ({ chef }) => {
   const { picture, name, id, likes, experience, recipeCategory } = chef;
 
   return (
-    <div className="card card-compact w-full bg-base-100 shadow-2xl">
+    <div className="card card-compact w-full bg-base-100 hover:bg-base-200 duration-300 shadow-2xl">
       <figure>
         <img className="h-52 w-full object-cover" src={picture} alt="Shoes" />
       </figure>
