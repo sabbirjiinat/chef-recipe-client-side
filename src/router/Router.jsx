@@ -5,11 +5,13 @@ import ChefDetailsWithRecipes from "../components/ChefDetailWithRecipes/ChefDeta
 import Register from "../sharedPage/Register/Register";
 import Login from "../sharedPage/Login/Login";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import ErrorPage from "../components/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout></Layout>,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
