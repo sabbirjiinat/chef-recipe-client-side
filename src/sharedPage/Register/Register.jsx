@@ -9,7 +9,7 @@ import googleLogo from "../../../src/assets/google.png";
 const Register = () => {
   const [userError, setUserError] = useState(null);
   const [userSuccess, setUserSuccess] = useState(null);
-  const { handleRegisterWithEmail,LogInWithGoogle } = useContext(AuthContext);
+  const { handleRegisterWithEmail,LogInWithGoogle,  loginWithGitHub } = useContext(AuthContext);
   const handleRegister = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -52,6 +52,18 @@ const Register = () => {
         console.log(error);
         setUserError(error.message)
     })
+  }
+
+  const loginWithGithub = () => {
+    loginWithGitHub()
+    .then(result => {
+      const loggedUser = result.user;
+      console.log(loggedUser);
+      setUserSuccess('Successfully login with github')
+    }).catch(error => {
+      console.log(error);
+      setUserError(error.message)
+  })
   }
 
 
@@ -157,7 +169,7 @@ const Register = () => {
             <img className="h-4" src={googleLogo} alt="" />
             Login With Google
           </button>
-          <button className="flex items-center gap-1  hover:bg-blue-600 duration-300 hover:text-white  rounded-md px-1 py-1 font-semibold ">
+          <button onClick={loginWithGithub} className="flex items-center gap-1  hover:bg-blue-600 duration-300 hover:text-white  rounded-md px-1 py-1 font-semibold ">
             <FaGithub></FaGithub>
             Login With Github
           </button>

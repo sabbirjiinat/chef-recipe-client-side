@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Recipe from "../Recipe/Recipe";
 
+
 const ChefDetailsWithRecipes = () => {
   const [recipes, setRecipes] = useState(null);
   const chefDetails = useLoaderData();
@@ -9,22 +10,21 @@ const ChefDetailsWithRecipes = () => {
     chefDetails;
   //   console.log(chefDetails);
   useEffect(() => {
-    fetch(
-      `https://react-firebase-chef-recipe-server-site.vercel.app/recipe/${id}`
-    )
+    fetch(`https://react-firebase-chef-recipe-server-site.vercel.app/recipe/${id}`)
       .then((res) => res.json())
       .then((data) => setRecipes(data));
   }, []);
+
 
   return (
     <div>
       <div className="md:flex md:justify-center items-center gap-7 px-5 md:px-12  mt-6">
         <div className="md:w-2/4 mb-4 md:mb-0">
-          <img
-            className="h-80 w-full rounded-md shadow-2xl object-cover"
-            src={picture}
-            alt=""
-          />
+        <img
+  className="h-80 w-full rounded-md shadow-2xl object-cover"
+  src={picture}
+  alt=""
+/>
         </div>
         <div className="card md:w-2/4  h-80 bg-base-300 shadow-2xl">
           <div className="card-body pt-2 ps-4">

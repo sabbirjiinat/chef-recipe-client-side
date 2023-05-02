@@ -13,7 +13,7 @@ const Login = () => {
   const [userSuccess, setUserSuccess] = useState(null);
   const from = location.state?.from?.pathname || '/';
 
-  const { handleLoginWithEmail,LogInWithGoogle } = useContext(AuthContext);
+  const { handleLoginWithEmail,LogInWithGoogle,loginWithGitHub } = useContext(AuthContext);
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -51,6 +51,18 @@ const Login = () => {
         console.log(error);
         setUserError(error.message)
     })
+  }
+
+  const loginWithGithub = () => {
+    loginWithGitHub()
+    .then(result => {
+      const loggedUser = result.user;
+      console.log(loggedUser);
+      setUserSuccess('Successfully login with github')
+    }).catch(error => {
+      console.log(error);
+      setUserError(error.message)
+  })
   }
 
   return (
@@ -105,7 +117,7 @@ const Login = () => {
             <img className="h-4" src={googleLogo} alt="" />
             Login With Google
           </button>
-          <button className="flex items-center gap-1  hover:bg-blue-600 duration-300 hover:text-white  rounded-md px-1 py-1 font-semibold ">
+          <button onClick={loginWithGithub} className="flex items-center gap-1  hover:bg-blue-600 duration-300 hover:text-white  rounded-md px-1 py-1 font-semibold ">
             <FaGithub></FaGithub>
             Login With Github
           </button>
