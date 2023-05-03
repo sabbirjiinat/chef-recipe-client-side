@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Restaurants = ({ restaurant }) => {
-    console.log(restaurant);
+    // console.log(restaurant);
     return (
         <div className='relative transform duration-200 hover:-translate-y-2 '>
             <img className='h-52 w-full rounded-3xl ' src={restaurant.image} alt="" />

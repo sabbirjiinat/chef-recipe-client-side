@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -6,10 +6,12 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 const Recipe = ({ recipe }) => {
+  const [disabledButton,setDisabledButton] = useState(false)
   console.log(recipe);
   const { name, ingredients, cookingMethod, rating, image_url } = recipe;
   const handleFavorite = () => {
     toast("Added to your favorite recipe !!");
+    setDisabledButton(true)
   };
   return (
     <div className="card card-compact shadow-2xl w-full">
@@ -62,7 +64,8 @@ const Recipe = ({ recipe }) => {
         <div className="card-actions justify-end">
           <button
             onClick={handleFavorite}
-            className="bg-blue-400 text-xl hover:bg-blue-600 duration-300 hover:text-white block text-center rounded-sm w-full px-3 py-1 font-semibold "
+            disabled={disabledButton}
+            className={`bg-blue-400 text-xl hover:bg-blue-600 duration-300 hover:text-white block text-center rounded-sm w-full px-3 py-1 font-semibold ${disabledButton && 'bg-gray-600 hover:bg-gray-600 hover:text-current'} `}
           >
             Favorite
           </button>

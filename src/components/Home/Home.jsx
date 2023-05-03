@@ -3,10 +3,15 @@ import Lottie from "lottie-react";
 import cookingBanner from "../../../public/cookingBanner.json";
 import Chef from "../Chef/Chef";
 import Restaurants from "../Restaurants/Restaurants";
+import { useLoaderData } from "react-router-dom";
+import TraditionalFood from "../TraditionalFood/TraditionalFood";
 
 const Home = () => {
   const [chefs, setChefs] = useState(null);
   const [restaurants, setRestaurants] = useState(null);
+  const [traditionalFoods, setTraditionalFoods] = useState(null)
+  const [data, setData] = useState(false)
+
   useEffect(() => {
     fetch("https://react-firebase-chef-recipe-server-site.vercel.app/chef")
       .then((res) => res.json())
@@ -20,6 +25,22 @@ const Home = () => {
       .then((res) => res.json())
       .then((data) => setRestaurants(data));
   }, []);
+
+  useEffect(() => {
+    fetch(
+      "https://react-firebase-chef-recipe-server-site-sabbirjiinat.vercel.app/traditionalFood"
+    )
+      .then((res) => res.json())
+      .then((data) => setTraditionalFoods(data));
+  }, []);
+
+
+  const handleSeeAll = () => {
+    setData(true)
+  }
+
+
+
   return (
     <div>
       <div className="md:flex md:items-center md:justify-center gap-6 md:px-12 md:p-10 bg-gray-100">
@@ -65,6 +86,20 @@ const Home = () => {
           ))}
         </div>
       </div>
+      <div>
+        <h1 className="animate-text bg-gradient-to-r from-cyan-500 via-purple-500 to-cyan-400 bg-clip-text text-transparent font-black lg:leading-tight text-3xl md:text-5xl  text-center my-12">Six Traditional Food You Must Try</h1>
+      <div className="grid grid-cols-1 md:grid-cols-3 mx-4   md:mx-12 gap-3">
+        {traditionalFoods?.slice(0, data ? 6 : 3).map(traditionalFood => <TraditionalFood
+          key={traditionalFood.id}
+          traditionalFood={traditionalFood}
+        >
+          
+        </TraditionalFood>)}
+        </div>
+   { !data && <div className="text-center my-7">
+    <button onClick={handleSeeAll} className="bg-sky-600 px-2 py-1 rounded-sm text-xl hover:bg-sky-800 text-white duration-300 font-semibold">See All</button> 
+       </div>}
+    </div>
     </div>
   );
 };
