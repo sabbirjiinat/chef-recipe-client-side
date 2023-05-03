@@ -1,26 +1,24 @@
 import React from "react";
-import { Rating } from '@smastrom/react-rating'
-import '@smastrom/react-rating/style.css'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import LazyLoad from 'react-lazy-load';
+import { Rating } from "@smastrom/react-rating";
+import "@smastrom/react-rating/style.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const Recipe = ({ recipe }) => {
   console.log(recipe);
   const { name, ingredients, cookingMethod, rating, image_url } = recipe;
   const handleFavorite = () => {
-   toast('Added to your favorite recipe !!')
-  
-    
-  }
+    toast("Added to your favorite recipe !!");
+  };
   return (
     <div className="card card-compact shadow-2xl w-full">
+  
       <figure>
-   
-      <img className="h-40 w-full object-cover" src={image_url} alt="Shoes" />
-   
-       
+        <img className="h-40 w-full object-cover" src={image_url} alt="Shoes" />
       </figure>
+      
+     
       <div className="card-body">
         <h2 className="card-title text-3xl">{name}</h2>
         <div>
@@ -45,15 +43,27 @@ const Recipe = ({ recipe }) => {
           ))}
           <div className="inline-flex items-center justify-center gap-2">
             <p className="text-base font-semibold text-gray-600">Rating : </p>
-          <Rating style={{ maxWidth: 120 }} value={Math.round(rating.number)} readOnly />
-            <p className="text-lg font-semibold text-gray-600">{ rating.number}</p>
+            <Rating
+              style={{ maxWidth: 120 }}
+              value={Math.round(rating.number)}
+              readOnly
+            />
+            <p className="text-lg font-semibold text-gray-600">
+              {rating.number}
+            </p>
           </div>
         </div>
         <p className="text-base text-gray-800">
-          <span className="font-bold text-base text-gray-600">Cooking Method : </span>{cookingMethod.slice(0, 200)}...
+          <span className="font-bold text-base text-gray-600">
+            Cooking Method :{" "}
+          </span>
+          {cookingMethod.slice(0, 200)}...
         </p>
         <div className="card-actions justify-end">
-          <button onClick={handleFavorite} className="bg-blue-400 text-xl hover:bg-blue-600 duration-300 hover:text-white block text-center rounded-sm w-full px-3 py-1 font-semibold ">
+          <button
+            onClick={handleFavorite}
+            className="bg-blue-400 text-xl hover:bg-blue-600 duration-300 hover:text-white block text-center rounded-sm w-full px-3 py-1 font-semibold "
+          >
             Favorite
           </button>
         </div>

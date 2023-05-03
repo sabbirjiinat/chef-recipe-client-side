@@ -54,7 +54,7 @@ const Home = () => {
           Do you want to feel the atmosphere of Japanese cuisine?
         </h1>
         <p className="text-center text-lg text-gray-600">
-          Book Your Favorite Restaurants & Enjoy With Your Family !!
+          Book Your Favorite Restaurant & Enjoy With Your Family !!
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 px-4 mt-12 md:px-12">
           {restaurants?.map((restaurant) => (
