@@ -7,13 +7,14 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 import googleLogo from "../../../src/assets/google.png";
 
 const Login = () => {
-  const location = useLocation()
-  const navigate = useNavigate()
+  const location = useLocation();
+  const navigate = useNavigate();
   const [userError, setUserError] = useState(null);
   const [userSuccess, setUserSuccess] = useState(null);
-  const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from?.pathname || "/";
 
-  const { handleLoginWithEmail,LogInWithGoogle,loginWithGitHub } = useContext(AuthContext);
+  const { handleLoginWithEmail, LogInWithGoogle, loginWithGitHub } =
+    useContext(AuthContext);
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -31,8 +32,8 @@ const Login = () => {
         const loggedUser = result.user;
         console.log(loggedUser);
         setUserSuccess("You have login successfully");
-        form.reset()
-        navigate(from,{replace:true})
+        form.reset();
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         console.log(error);
@@ -42,28 +43,31 @@ const Login = () => {
 
   const loginWithGoogle = () => {
     LogInWithGoogle()
-      .then(result => {
+      .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
-        setUserSuccess('Successfully login with google')
-        navigate(from, {replace:true})
-      }).catch(error => {
+        setUserSuccess("Successfully login with google");
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
         console.log(error);
-        setUserError(error.message)
-    })
-  }
+        setUserError(error.message);
+      });
+  };
 
   const loginWithGithub = () => {
     loginWithGitHub()
-    .then(result => {
-      const loggedUser = result.user;
-      console.log(loggedUser);
-      setUserSuccess('Successfully login with github')
-    }).catch(error => {
-      console.log(error);
-      setUserError(error.message)
-  })
-  }
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        setUserSuccess("Successfully login with github");
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.log(error);
+        setUserError(error.message);
+      });
+  };
 
   return (
     <div className="mx-16 mt-16 md:flex justify-center gap-5 h-80">
@@ -113,11 +117,17 @@ const Login = () => {
           Login
         </button>
         <div className="flex mt-5 gap-2">
-          <button onClick={loginWithGoogle} className="flex items-center gap-1 border-2 rounded-md hover:bg-blue-600 duration-300 hover:text-white px-1 py-1 font-semibold ">
+          <button
+            onClick={loginWithGoogle}
+            className="flex items-center gap-1 border-2 rounded-md hover:bg-blue-600 duration-300 hover:text-white px-1 py-1 font-semibold "
+          >
             <img className="h-4" src={googleLogo} alt="" />
             Login With Google
           </button>
-          <button onClick={loginWithGithub} className="flex items-center gap-1  hover:bg-blue-600 duration-300 hover:text-white  rounded-md px-1 py-1 font-semibold ">
+          <button
+            onClick={loginWithGithub}
+            className="flex items-center gap-1  hover:bg-blue-600 duration-300 hover:text-white  rounded-md px-1 py-1 font-semibold "
+          >
             <FaGithub></FaGithub>
             Login With Github
           </button>

@@ -3,24 +3,26 @@ import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { addToDb } from "../../fakeDb/fakeDb";
 
 const Recipe = ({ recipe }) => {
-  const [disabledButton,setDisabledButton] = useState(false)
-  console.log(recipe);
-  const { name, ingredients, cookingMethod, rating, image_url } = recipe;
+  const [disabledButton, setDisabledButton] = useState(false);
+  // console.log(recipe);
+  const { name, ingredients, cookingMethod, rating, image_url, _id } = recipe;
+
   const handleFavorite = () => {
+    addToDb(_id);
     toast("Added to your favorite recipe !!");
-    setDisabledButton(true)
+    setDisabledButton(true);
   };
+
+  
   return (
     <div className="card card-compact shadow-2xl w-full">
-  
       <figure>
         <img className="h-40 w-full object-cover" src={image_url} alt="Shoes" />
       </figure>
-      
-     
+
       <div className="card-body">
         <h2 className="card-title text-3xl">{name}</h2>
         <div>
@@ -65,7 +67,10 @@ const Recipe = ({ recipe }) => {
           <button
             onClick={handleFavorite}
             disabled={disabledButton}
-            className={`bg-blue-400 text-xl hover:bg-blue-600 duration-300 hover:text-white block text-center rounded-sm w-full px-3 py-1 font-semibold ${disabledButton && 'bg-gray-600 hover:bg-gray-600 hover:text-current'} `}
+            className={`bg-blue-400 text-xl hover:bg-blue-600 duration-300 hover:text-white block text-center rounded-sm w-full px-3 py-1 font-semibold ${
+              disabledButton &&
+              "bg-gray-600 hover:bg-gray-600 hover:text-neutral"
+            } `}
           >
             Favorite
           </button>

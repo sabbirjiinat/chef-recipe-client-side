@@ -7,6 +7,8 @@ import Login from "../sharedPage/Login/Login";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import ErrorPage from "../components/ErrorPage/ErrorPage";
 import Blog from "../components/Blog/Blog";
+import FavoriteRecipe from "../FavoriteRecipe/FavoriteRecipe";
+import favoriteProduct from "../FavoriteProductLoader/FavoriteProductLoader";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +45,11 @@ const router = createBrowserRouter([
         path: "/blog",
         element: <Blog></Blog>,
       },
+      {
+        path: '/favoriteRecipe',
+        element: <FavoriteRecipe></FavoriteRecipe>,
+        loader:favoriteProduct
+      }
     ],
   },
 ]);

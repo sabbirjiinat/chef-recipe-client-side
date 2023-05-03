@@ -54,21 +54,28 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  const updateUserProfile = () => {
-    return updateProfile(auth, user, {
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-    });
-  };
+  // const updateUserProfile = () => {
+  
+  //  const profile =  updateProfile(auth, user, {
+  //     displayName: user.displayName,
+  //     photoURL: user.photoURL,
+  //   });
+  //   console.log(profile);
+  // };
+
+ 
+
+
   const authInfo = {
     handleRegisterWithEmail,
     handleLoginWithEmail,
     user,
     loading,
     logOut,
-    updateUserProfile,
+    // updateUserProfile,
     LogInWithGoogle,
-    loginWithGitHub
+    loginWithGitHub,
+   
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

@@ -1,15 +1,19 @@
 import React, { useContext, useState } from "react";
 import Lottie from "lottie-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
 import registerAnimation from "../../../public/register/register1.json";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import googleLogo from "../../../src/assets/google.png";
 
+
 const Register = () => {
   const [userError, setUserError] = useState(null);
   const [userSuccess, setUserSuccess] = useState(null);
-  const { handleRegisterWithEmail,LogInWithGoogle,  loginWithGitHub } = useContext(AuthContext);
+  const navigate = useNavigate()
+  const location = useLocation()
+  const { handleRegisterWithEmail, LogInWithGoogle, loginWithGitHub } = useContext(AuthContext);
+  const from = location.state?.from?.pathname || '/';
   const handleRegister = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -34,6 +38,8 @@ const Register = () => {
         console.log(registeredUser);
         setUserSuccess("You have registered successfully");
         form.reset();
+        navigate('/login')
+       
       })
       .catch((error) => {
         console.log(error);
@@ -48,6 +54,7 @@ const Register = () => {
         const loggedUser = result.user;
         console.log(loggedUser);
         setUserSuccess('Successfully login with google')
+        navigate(from,{replace:true})
       }).catch(error => {
         console.log(error);
         setUserError(error.message)
@@ -60,6 +67,7 @@ const Register = () => {
       const loggedUser = result.user;
       console.log(loggedUser);
       setUserSuccess('Successfully login with github')
+      navigate(from,{replace:true})
     }).catch(error => {
       console.log(error);
       setUserError(error.message)
@@ -180,6 +188,7 @@ const Register = () => {
         animationData={registerAnimation}
       />
       ;
+    
     </div>
   );
 };
