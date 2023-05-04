@@ -1,26 +1,35 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import loginAnimation from "../../../public/login/login.json";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import { FaGithub } from "react-icons/fa";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import googleLogo from "../../../src/assets/google.png";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const emailRef = useRef();
   const [userError, setUserError] = useState(null);
   const [userSuccess, setUserSuccess] = useState(null);
   const from = location.state?.from?.pathname || "/";
 
-  const { handleLoginWithEmail, LogInWithGoogle, loginWithGitHub } =
-    useContext(AuthContext);
+  const {
+    handleLoginWithEmail,
+    LogInWithGoogle,
+    loginWithGitHub,
+    handleResetPassword,
+  
+  } = useContext(AuthContext);
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+
     setUserError("");
     setUserSuccess("");
     if (password.length < 6) {
@@ -30,27 +39,42 @@ const Login = () => {
     handleLoginWithEmail(email, password)
       .then((result) => {
         const loggedUser = result.user;
-        console.log(loggedUser);
         setUserSuccess("You have login successfully");
         form.reset();
+      
         navigate(from, { replace: true });
+        
       })
       .catch((error) => {
-        console.log(error);
         setUserError(error.message);
       });
   };
+
+  const handleResetEmailPassword = (event) => {
+    const email = emailRef.current.value;
+    handleResetPassword(email)
+      .then(() => {
+        toast("Check Your Email & Reset Password");
+      })
+      .catch((error) => {
+        setUserError(error.message);
+      });
+  };
+  
+ 
+
+
+
 
   const loginWithGoogle = () => {
     LogInWithGoogle()
       .then((result) => {
         const loggedUser = result.user;
-        console.log(loggedUser);
+
         setUserSuccess("Successfully login with google");
         navigate(from, { replace: true });
       })
       .catch((error) => {
-        console.log(error);
         setUserError(error.message);
       });
   };
@@ -59,12 +83,11 @@ const Login = () => {
     loginWithGitHub()
       .then((result) => {
         const loggedUser = result.user;
-        console.log(loggedUser);
+
         setUserSuccess("Successfully login with github");
         navigate(from, { replace: true });
       })
       .catch((error) => {
-        console.log(error);
         setUserError(error.message);
       });
   };
@@ -80,6 +103,7 @@ const Login = () => {
             className="w-full border-2 px-2 rounded-md text-lg "
             type="email"
             name="email"
+            ref={emailRef}
             placeholder="Email"
             required
             id="email"
@@ -104,14 +128,24 @@ const Login = () => {
             <small>{userSuccess}</small>
           </p>
         </div>
-        <p className="mb-3">
-          <small className="font-bold ">
-            New To Sakura ?{" "}
-            <Link className="text-red-700" to="/register">
-              Register
-            </Link>
-          </small>
-        </p>
+        <div className="flex justify-between">
+          <p className="mb-3">
+            <small className="font-bold ">
+              New To Sakura ?{" "}
+              <Link className="text-red-700" to="/register">
+                Register
+              </Link>
+            </small>
+          </p>
+          <p>
+            <small
+              onClick={handleResetEmailPassword}
+              className="underline font-semibold cursor-pointer"
+            >
+              Reset Password
+            </small>
+          </p>
+        </div>
 
         <button className="bg-blue-400 text-xl hover:bg-blue-600 duration-300 hover:text-white block text-center rounded-sm w-full px-3 py-1 font-semibold ">
           Login
@@ -138,6 +172,7 @@ const Login = () => {
         style={{ width: "full" }}
         animationData={loginAnimation}
       />
+      <ToastContainer />
     </div>
   );
 };

@@ -1,7 +1,9 @@
 import { getMyFavoriteRecipe } from "../fakeDb/fakeDb";
 
 const favoriteProduct = async () => {
-  const products = await fetch("http://localhost:5330/recipe");
+  const products = await fetch(
+    "https://react-firebase-chef-recipe-server-site-sabbirjiinat.vercel.app/recipe"
+  );
   const allProducts = await products.json();
 
   const storedRecipe = getMyFavoriteRecipe();
@@ -13,8 +15,8 @@ const favoriteProduct = async () => {
     if (findFavoriteRecipe) {
       newArray.push(findFavoriteRecipe);
     }
-    }
-    return newArray
+  }
+  return newArray;
 };
 
 export default favoriteProduct;

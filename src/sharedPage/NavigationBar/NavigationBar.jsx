@@ -1,9 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import './NavigationBar.css'
 
 const NavigationBar = () => {
-  const { user, logOut} = useContext(AuthContext);
+  const { user, logOut, } = useContext(AuthContext);
+
   const logout = () => {
     logOut()
       .then()
@@ -14,11 +16,13 @@ const NavigationBar = () => {
 
   return (
     <div className="navbar bg-base-300 md:px-12">
-      <div className="flex-1">
-        <Link to='/' className="btn btn-ghost normal-case text-xl">Sakura Chef</Link>
+      <div className="flex-1   ">
+        <Link to="/" className="navigationBar-navLink-title btn btn-ghost normal-case text-xl">
+          Sakura Chef
+        </Link>
       </div>
       <div className="flex-none">
-        <div className="space-x-3 pe-3 font-semibold">
+        <div className="navigationBar-navLink space-x-3 pe-3 font-semibold">
           <NavLink
             className={({ isActive }) =>
               isActive ? "text-blue-700" : "defaultColor"
@@ -35,17 +39,19 @@ const NavigationBar = () => {
           >
             Blog
           </NavLink>
-       { user &&  <NavLink
-            className={({ isActive }) =>
-              isActive ? "text-blue-700" : "defaultColor"
-            }
-            to="/favoriteRecipe"
-          >
-            Favorite Recipe
-          </NavLink>}
+          {user && (
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "text-blue-700" : "defaultColor"
+              }
+              to="/favoriteRecipe"
+            >
+              Favorite Recipe
+            </NavLink>
+          )}
         </div>
         {user ? (
-          <div className="flex items-center">
+          <div className="flex items-center navigationBar-btn-container">
             <button
               onClick={logout}
               className="bg-blue-400  hover:bg-blue-600 duration-300 hover:text-white  text-center rounded-sm  px-3 py-1 font-semibold me-2 "

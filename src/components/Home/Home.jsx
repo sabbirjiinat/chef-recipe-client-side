@@ -75,7 +75,7 @@ const Home = () => {
           Do you want to feel the atmosphere of Japanese cuisine?
         </h1>
         <p className="text-center text-lg text-gray-600">
-          Book Your Favorite Restaurant & Enjoy With Your Family !!
+          Book Your Favorite Restaurant & Enjoy With Your Family !!!
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 px-4 mt-12 md:px-12">
           {restaurants?.map((restaurant) => (
@@ -87,7 +87,7 @@ const Home = () => {
         </div>
       </div>
       <div>
-        <h1 className="animate-text bg-gradient-to-r from-cyan-500 via-purple-500 to-cyan-400 bg-clip-text text-transparent font-black lg:leading-tight text-3xl md:text-5xl  text-center my-12">Six Traditional Food You Must Try</h1>
+        <h1 className="mx-5 animate-text bg-gradient-to-r from-cyan-500 via-purple-500 to-cyan-400 bg-clip-text text-transparent font-black lg:leading-tight text-3xl md:text-5xl  text-center my-12">Six Traditional Food You Must Try</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 mx-4   md:mx-12 gap-3">
         {traditionalFoods?.slice(0, data ? 6 : 3).map(traditionalFood => <TraditionalFood
           key={traditionalFood.id}

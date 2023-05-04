@@ -5,15 +5,16 @@ import { FaGithub } from "react-icons/fa";
 import registerAnimation from "../../../public/register/register1.json";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import googleLogo from "../../../src/assets/google.png";
-
+import { updateProfile } from "firebase/auth";
 
 const Register = () => {
   const [userError, setUserError] = useState(null);
   const [userSuccess, setUserSuccess] = useState(null);
-  const navigate = useNavigate()
-  const location = useLocation()
-  const { handleRegisterWithEmail, LogInWithGoogle, loginWithGitHub } = useContext(AuthContext);
-  const from = location.state?.from?.pathname || '/';
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { handleRegisterWithEmail, LogInWithGoogle, loginWithGitHub } =
+    useContext(AuthContext);
+  const from = location.state?.from?.pathname || "/";
   const handleRegister = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -22,7 +23,7 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
     const confirm = form.confirm.value;
-    console.log(name, photo, email, password, confirm);
+
     setUserError("");
     setUserSuccess("");
     if (password.length < 6) {
@@ -35,45 +36,51 @@ const Register = () => {
     handleRegisterWithEmail(email, password)
       .then((result) => {
         const registeredUser = result.user;
-        console.log(registeredUser);
         setUserSuccess("You have registered successfully");
+        updateUserProfile(result.user, name, photo);
         form.reset();
-        navigate('/login')
-       
+        navigate("/login");
       })
       .catch((error) => {
-        console.log(error);
         setUserError(error.message);
       });
   };
 
+  const updateUserProfile = (user, name, photo) => {
+    updateProfile(user, {
+      displayName: name,
+      photoURL: photo,
+    })
+      .then(() => {})
+      .catch((error) => {
+        setUserError(error.message);
+      });
+  };
 
   const loginWithGoogle = () => {
     LogInWithGoogle()
-      .then(result => {
+      .then((result) => {
         const loggedUser = result.user;
-        console.log(loggedUser);
-        setUserSuccess('Successfully login with google')
-        navigate(from,{replace:true})
-      }).catch(error => {
-        console.log(error);
-        setUserError(error.message)
-    })
-  }
+
+        setUserSuccess("Successfully login with google");
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        setUserError(error.message);
+      });
+  };
 
   const loginWithGithub = () => {
     loginWithGitHub()
-    .then(result => {
-      const loggedUser = result.user;
-      console.log(loggedUser);
-      setUserSuccess('Successfully login with github')
-      navigate(from,{replace:true})
-    }).catch(error => {
-      console.log(error);
-      setUserError(error.message)
-  })
-  }
-
+      .then((result) => {
+        const loggedUser = result.user;
+        setUserSuccess("Successfully login with github");
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        setUserError(error.message);
+      });
+  };
 
   return (
     <div className=" md:flex justify-center gap-5">
@@ -173,11 +180,17 @@ const Register = () => {
           Register
         </button>
         <div className="flex mt-5 gap-2">
-          <button onClick={loginWithGoogle} className="flex items-center gap-1 border-2 rounded-md hover:bg-blue-600 duration-300 hover:text-white px-1 py-1 font-semibold ">
+          <button
+            onClick={loginWithGoogle}
+            className="flex items-center gap-1 border-2 rounded-md hover:bg-blue-600 duration-300 hover:text-white px-1 py-1 font-semibold "
+          >
             <img className="h-4" src={googleLogo} alt="" />
             Login With Google
           </button>
-          <button onClick={loginWithGithub} className="flex items-center gap-1  hover:bg-blue-600 duration-300 hover:text-white  rounded-md px-1 py-1 font-semibold ">
+          <button
+            onClick={loginWithGithub}
+            className="flex items-center gap-1  hover:bg-blue-600 duration-300 hover:text-white  rounded-md px-1 py-1 font-semibold "
+          >
             <FaGithub></FaGithub>
             Login With Github
           </button>
@@ -188,7 +201,6 @@ const Register = () => {
         animationData={registerAnimation}
       />
       ;
-    
     </div>
   );
 };

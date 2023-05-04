@@ -7,7 +7,7 @@ import { addToDb } from "../../fakeDb/fakeDb";
 
 const Recipe = ({ recipe }) => {
   const [disabledButton, setDisabledButton] = useState(false);
-  // console.log(recipe);
+
   const { name, ingredients, cookingMethod, rating, image_url, _id } = recipe;
 
   const handleFavorite = () => {
@@ -16,7 +16,6 @@ const Recipe = ({ recipe }) => {
     setDisabledButton(true);
   };
 
-  
   return (
     <div className="card card-compact shadow-2xl w-full">
       <figure>
@@ -69,7 +68,7 @@ const Recipe = ({ recipe }) => {
             disabled={disabledButton}
             className={`bg-blue-400 text-xl hover:bg-blue-600 duration-300 hover:text-white block text-center rounded-sm w-full px-3 py-1 font-semibold ${
               disabledButton &&
-              "bg-gray-600 hover:bg-gray-600 hover:text-neutral"
+              "bg-gray-600 hover:bg-gray-600 hover:text-current"
             } `}
           >
             Favorite

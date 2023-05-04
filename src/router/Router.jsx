@@ -19,7 +19,6 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-       
       },
       {
         path: "/chef/:id",
@@ -46,10 +45,10 @@ const router = createBrowserRouter([
         element: <Blog></Blog>,
       },
       {
-        path: '/favoriteRecipe',
+        path: "/favoriteRecipe",
         element: <FavoriteRecipe></FavoriteRecipe>,
-        loader:favoriteProduct
-      }
+        loader: favoriteProduct,
+      },
     ],
   },
 ]);

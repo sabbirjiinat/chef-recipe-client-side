@@ -1,0 +1,14 @@
+@media only screen and  (max-width:500px) {
+    .navigationBar-navLink  a {
+      font-size: 13px;
+    }
+    .navigationBar-navLink-title{
+        font-size: 13px;
+        padding: 0;
+        margin: 0;
+        
+    }
+
+
+    
+}
