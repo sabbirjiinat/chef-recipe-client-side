@@ -160,7 +160,7 @@ const Login = () => {
           </button>
           <button
             onClick={loginWithGithub}
-            className="flex items-center gap-1  hover:bg-blue-600 duration-300 hover:text-white  rounded-md px-1 py-1 font-semibold "
+            className="flex items-center gap-1 border-2    hover:bg-blue-600 duration-300 hover:text-white  rounded-md px-1 py-1 font-semibold "
           >
             <FaGithub></FaGithub>
             Login With Github

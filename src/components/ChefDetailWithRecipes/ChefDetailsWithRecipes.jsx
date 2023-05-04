@@ -31,7 +31,7 @@ const ChefDetailsWithRecipes = () => {
             <h2 className="card-title text-4xl font-bold">{name}</h2>
 
             <p className="text-lg text-gray-700 font-semibold">{description}</p>
-            <div className="mt-3">
+            <div className="mt-1">
               <p className="font-semibold text-gray-600">Likes : {likes}</p>
               <p className="font-semibold text-gray-600">
                 Recipes : {recipeCategory}

@@ -58,11 +58,12 @@ const NavigationBar = () => {
             >
               Logout
             </button>
+            <Link to='/userDetails'>
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar ">
               <div className="w-10 rounded-full">
                 <img title={user.displayName} src={user.photoURL} />
               </div>
-            </label>
+            </label></Link>
           </div>
         ) : (
           <Link

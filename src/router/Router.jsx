@@ -9,6 +9,7 @@ import ErrorPage from "../components/ErrorPage/ErrorPage";
 import Blog from "../components/Blog/Blog";
 import FavoriteRecipe from "../FavoriteRecipe/FavoriteRecipe";
 import favoriteProduct from "../FavoriteProductLoader/FavoriteProductLoader";
+import UserDetails from "../components/UserDetails/UserDetails";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
         element: <FavoriteRecipe></FavoriteRecipe>,
         loader: favoriteProduct,
       },
+      {
+        path: 'userDetails',
+        element:<UserDetails></UserDetails>
+      }
     ],
   },
 ]);
