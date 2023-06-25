@@ -15,7 +15,7 @@ const NavigationBar = () => {
   };
 
   return (
-    <div className="navbar bg-base-300 md:px-12">
+    <div className="navbar bg-indigo-400 md:px-12">
       <div className="flex-1   ">
         <Link to="/" className="navigationBar-navLink-title btn btn-ghost normal-case text-xl">
           Sakura Chef
